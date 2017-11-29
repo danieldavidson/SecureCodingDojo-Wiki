@@ -1,5 +1,3 @@
-# Screenshots
-
 Here are some images of the deployed application.
 
 ### Front page
