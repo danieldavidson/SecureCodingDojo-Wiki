@@ -6,7 +6,7 @@ NOTE:
 > Everyone with a Google account will be able to login to your app unless you setup IP restrictions.
 
 Once you have the OAuth credentials configure the training portal as follows:
-- Edit to run encryptConfigs.js and set the value for `googleSecret`
+- Edit `encryptConfigs.js` and set the value for `googleSecret`
 - Run `encryptConfig.js`
-- Update the value for the `config.encGooglrClientSecret` variable in `config.js`
-- Update the values for `config.googleClientId` in config.js
+- Update the value for the `config.encGoogleClientSecret` variable in `config.js`
+- Update the value for `config.googleClientId` in `config.js`
