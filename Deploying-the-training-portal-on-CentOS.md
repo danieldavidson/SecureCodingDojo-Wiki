@@ -356,8 +356,8 @@ http {
         server_name  _;
         root         /usr/share/nginx/html;
 
-        ssl_certificate "/etc/pki/nginx/server.crt";
-        ssl_certificate_key "/etc/pki/nginx/private/server.key";
+        ssl_certificate "/etc/ssl/certs/nginx-selfsigned.crt";
+        ssl_certificate_key "/etc/ssl/private/nginx-selfsigned.key";
         ssl_session_cache shared:SSL:1m;
         ssl_session_timeout  10m;
         ssl_ciphers HIGH:!aNULL:!MD5;
@@ -391,6 +391,12 @@ Update the SELinux settings to allow nginx to accept network connections as a se
 
 ~~~~
 sudo setsebool httpd_can_network_connect 1 -P
+~~~~
+
+Remove the 8081 port in the firewall:
+~~~~
+sudo firewall-cmd --zone=public --permanent --remove-port=8081/tcp
+sudo firewall-cmd --reload
 ~~~~
 
 Reboot. You are done.
