@@ -223,6 +223,57 @@ Sun Dec 03 2017 10:15:53 GMT-0500 (EST) - Configured url:http://<hostname>:8081
 Sun Dec 03 2017 10:15:53 GMT-0500 (EST) - Is secure:false
 ~~~~
 
-If you see any crypto exceptions check that you didn't leave any encrypted variables set to empty strings.
-
 Navigate to the configured url. You should now be able to register an account for yourself and start the challenges.
+
+### What could go wrong
+* You see crypto.js exceptions. Check that you didn't leave any encrypted variables set to empty strings.
+* You cannot register. Keep getting invalid captcha. The value of `encExpressSessionSecret` is probably incorrect. Generate a new one using `encryptConfigs.js` and make sure you copy the entire string.
+
+### Next steps
+
+At this point you have the training portal application working on CentOS. If you wish to deploy in AWS you can stop here and import your installation directory into a AWS Elastic Beanstalk environment. See the corresponding wiki pages for instructions.
+
+You may also want to enable other authentication types such as Google or Slack. See the corresponding pages for instructions. Commenting out the `config.localUsersPath` setting will disable the local authentication option.
+
+If you want to continue with configuring the training portal as a service see instructions below.
+
+### Configuring the training portal as a service
+
+Install `forever`.
+
+~~~~
+sudo npm install forever --global
+~~~~
+
+Create a service unit
+
+~~~~
+sudo vi /etc/systemd/system/trainingportal.service 
+~~~~
+
+Copy paste the following contents in the file. Don't forget to hit i for insert mode.
+Also update the environment variables accordingly. The `/etc/environment` is not visible in service mode. 
+
+~~~~
+[Unit]
+Description=Training portal service
+After=syslog.target network.target
+
+[Service]
+Type=forking
+
+ExecStart=/usr/bin/forever start /opt/scd/SecureCodingDojo/trainingportal/server.js
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=nodejs
+Environment=ENC_KEY=<YOUR_ENC_KEY>  ENC_KEY_IV=<YOUR_ENC_KEY_IV> DOJO_URL=http://<YOUR_HOST>:8081 DOJO_TARGET_URL=http://insecureinchost:8080/insecureinc DOJO_DB_HOST=localhost
+
+User=scd
+Group=scd
+
+[Install]
+WantedBy=multi-user.target
+~~~~
+
