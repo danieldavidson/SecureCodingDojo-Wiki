@@ -18,7 +18,13 @@ There's a good article on installing MariaDB on CentOS here: https://www.digital
 
 You will have to create a database and a user for the secure coding dojo. Grant your secure coding dojo user full privileges on the newly created database.
 
-The following article describes how to do that: https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql
+You can access the mysql console using the following command
+
+~~~~
+mysql -u root -p
+~~~~
+
+The following article describes how to create a database and a user: https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql
 
 #### Setting up a OS user for the training portal
 
