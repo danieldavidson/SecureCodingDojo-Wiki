@@ -3,6 +3,7 @@ The following page covers installing the training portal on RedHat/CentOS using 
 
 #### Pre-requisites
 ~~~~
+CentOS 7 minimal installation
 NodeJS v6
 MySQL (MariaDB)
 Nginx
@@ -137,6 +138,7 @@ NOTE:
 >If you regenerate secrets you will need to update the InsecureInc app by updating the code.properties file on the tomcat deployment in 'webapps/insecureinc/classes/inc/insecure'
 
 Save the `encryptConfigs.js` file.
+
 NOTE:
 >For those that are not familiar with vi hit ESC and then enter `:wq`
 
@@ -225,7 +227,7 @@ Sun Dec 03 2017 10:15:53 GMT-0500 (EST) - Is secure:false
 
 Navigate to the configured url. You should now be able to register an account for yourself and start the challenges.
 
-### What could go wrong
+#### What could go wrong
 * You see crypto.js exceptions. Check that you didn't leave any encrypted variables set to empty strings.
 * You cannot register. Keep getting invalid captcha. The value of `encExpressSessionSecret` is probably incorrect. Generate a new one using `encryptConfigs.js` and make sure you copy the entire string.
 
@@ -286,6 +288,9 @@ sudo systemctl start trainingportal
 sudo systemctl status trainingportal
 ~~~~
 
+#### What could go wrong
+* You can't connect to the portal on port 8081. You probably are missing an environment variable in the Environment section of the service configuration file.
+
 Enable the service with:
 
 ~~~~
@@ -312,9 +317,37 @@ Edit the contents of the nginx configuration file with:
 sudo vi /etc/nginx/nginx.conf
 ~~~~
 
-Add the HTTPS configuration section which is commented out by default with the following.
+Replace the http configuration section, with the following:
 
 ~~~~
+http {
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile            on;
+    tcp_nopush          on;
+    tcp_nodelay         on;
+    keepalive_timeout   65;
+    types_hash_max_size 2048;
+
+    include             /etc/nginx/mime.types;
+    default_type        application/octet-stream;
+
+    # Load modular configuration files from the /etc/nginx/conf.d directory.
+    # See http://nginx.org/en/docs/ngx_core_module.html#include
+    # for more information.
+    include /etc/nginx/conf.d/*.conf;
+
+    server {
+        listen       80 default_server;
+        listen       [::]:80 default_server;
+        server_name  _;
+        return 301 https://$host$request_uri;
+    }
+
 # Settings for a TLS enabled server.
 
     server {
@@ -351,4 +384,13 @@ Add the HTTPS configuration section which is commented out by default with the f
             location = /50x.html {
         }
     }
+}
 ~~~~
+
+Update the SELinux settings to allow nginx to accept network connections as a service.
+
+~~~~
+sudo setsebool httpd_can_network_connect 1 -P
+~~~~
+
+Reboot. You are done.
