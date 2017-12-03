@@ -24,7 +24,24 @@ You can access the mysql console using the following command
 mysql -u root -p
 ~~~~
 
-The following article describes how to create a database and a user: https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql
+Create a user with the following command:
+
+~~~~
+CREATE USER '_securecodingdojo_';
+~~~~
+
+Create a database using the following command:
+
+~~~~
+CREATE DATABASE _securecodingdojodb_;
+~~~~
+
+Grant your newly created user access to the secure coding dojo database with the following:
+
+~~~~
+GRANT ALL ON securecodingdojodb.* to '_securecodingdojo_'@'localhost' IDENTIFIED BY '_dbpassword_';
+~~~~
+
 
 #### Setting up a OS user for the training portal
 
