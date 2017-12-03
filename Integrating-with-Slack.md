@@ -9,7 +9,7 @@ You will need to create a Slack app for authentication.
 
 #### Configuring the training portal
 
-- Edit to run encryptConfigs.js and set the value for `slackSecret`
-- Run encryptConfig.js
+- Edit `encryptConfigs.js` and set the value for `slackSecret`
+- Run `encryptConfig.js`
 - Update the value for the `config.encSlackClientSecret` variable in `config.js`
 - Update the values for `config.slackClientId` and `config.slackTeamId`
