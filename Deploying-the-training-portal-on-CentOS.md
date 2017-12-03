@@ -277,3 +277,78 @@ Group=scd
 WantedBy=multi-user.target
 ~~~~
 
+Save with ESC and `:wq`
+
+Check the service is running as expected with:
+
+~~~~
+sudo systemctl start trainingportal
+sudo systemctl status trainingportal
+~~~~
+
+Enable the service with:
+
+~~~~
+sudo systemctl enable trainingportal
+~~~~
+
+Reboot and check that the dojo is running at startup.
+
+### Install nginx
+
+You probably want to enable a secure connection to the training portal with valid certificates. For this you can put nginx in front of nodejs per the instructions below.
+
+The following article describes how to install and configure nginx on CentOS: https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-centos-7
+
+### Generate SSL certificates for nginx
+
+Follow the instructions in the following article to generate SSL certificates for nginx: https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-on-centos-7
+
+### Configure the nginx reverse proxy
+
+Edit the contents of the nginx configuration file with:
+
+~~~~
+sudo vi /etc/nginx/nginx.conf
+~~~~
+
+Add the HTTPS configuration section which is commented out by default with the following.
+
+~~~~
+# Settings for a TLS enabled server.
+
+    server {
+        listen       443 ssl http2 default_server;
+        listen       [::]:443 ssl http2 default_server;
+        server_name  _;
+        root         /usr/share/nginx/html;
+
+        ssl_certificate "/etc/pki/nginx/server.crt";
+        ssl_certificate_key "/etc/pki/nginx/private/server.key";
+        ssl_session_cache shared:SSL:1m;
+        ssl_session_timeout  10m;
+        ssl_ciphers HIGH:!aNULL:!MD5;
+        ssl_prefer_server_ciphers on;
+
+        # Load configuration files for the default server block.
+        include /etc/nginx/default.d/*.conf;
+
+        location / {
+                proxy_pass http://127.0.0.1:8081;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+                proxy_set_header X-Forwarded-Proto https;
+        }
+
+        error_page 404 /404.html;
+            location = /40x.html {
+        }
+
+        error_page 500 502 503 504 /50x.html;
+            location = /50x.html {
+        }
+    }
+~~~~
