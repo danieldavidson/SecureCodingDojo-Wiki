@@ -161,6 +161,7 @@ Configure the CHALLENGE_KEY and CHALLENGE_KEY_IV environment variables to store 
 ...
 ~~~~
 
+Delete the secrets and passwords from the encryptConfigs.js file.
 
 Edit the config.js file with vi
 
