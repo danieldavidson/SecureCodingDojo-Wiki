@@ -7,6 +7,6 @@ NOTE:
 
 Once you have the OAuth credentials configure the training portal as follows:
 - Edit to run encryptConfigs.js and set the value for `googleSecret`
-- Run encryptConfig.js
+- Run `encryptConfig.js`
 - Update the value for the `config.encGooglrClientSecret` variable in `config.js`
 - Update the values for `config.googleClientId` in config.js
