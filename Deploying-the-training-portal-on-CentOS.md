@@ -201,3 +201,28 @@ module.exports = config;
 Reminder: hit ESC and enter `:wq` to save.
 
 ### Test the portal is running
+
+Open port 8081 in the firewall with
+
+~~~~
+sudo firewall-cmd --zone=public --permanent --add-port=8081/tcp
+sudo firewall-cmd --reload
+~~~~
+
+Run server.js with:
+
+~~~~
+sudo -u scd node server.js 
+~~~~
+
+You should see the following output:
+
+~~~~
+Sun Dec 03 2017 10:15:53 GMT-0500 (EST) - Listening on 8081
+Sun Dec 03 2017 10:15:53 GMT-0500 (EST) - Configured url:http://<hostname>:8081
+Sun Dec 03 2017 10:15:53 GMT-0500 (EST) - Is secure:false
+~~~~
+
+If you see any crypto exceptions check that you didn't leave any encrypted variables set to empty strings.
+
+Navigate to the configured url. You should now be able to register an account for yourself and start the challenges.
