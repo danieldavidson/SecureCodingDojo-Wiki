@@ -39,7 +39,8 @@ CREATE DATABASE securecodingdojodb;
 Grant your newly created user access to the secure coding dojo database with the following:
 
 ~~~~
-GRANT ALL ON securecodingdojodb.* to 'securecodingdojouser'@'localhost' IDENTIFIED BY '_dbpassword_';
+GRANT ALL ON securecodingdojodb.* to 'securecodingdojouser'@'localhost'
+ IDENTIFIED BY '_dbpassword_';
 ~~~~
 
 
