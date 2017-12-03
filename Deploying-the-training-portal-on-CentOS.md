@@ -27,19 +27,19 @@ mysql -u root -p
 Create a user with the following command:
 
 ~~~~
-CREATE USER '_securecodingdojo_';
+CREATE USER 'securecodingdojouser';
 ~~~~
 
 Create a database using the following command:
 
 ~~~~
-CREATE DATABASE _securecodingdojodb_;
+CREATE DATABASE securecodingdojodb;
 ~~~~
 
 Grant your newly created user access to the secure coding dojo database with the following:
 
 ~~~~
-GRANT ALL ON securecodingdojodb.* to '_securecodingdojo_'@'localhost' IDENTIFIED BY '_dbpassword_';
+GRANT ALL ON securecodingdojodb.* to 'securecodingdojouser'@'localhost' IDENTIFIED BY '_dbpassword_';
 ~~~~
 
 
