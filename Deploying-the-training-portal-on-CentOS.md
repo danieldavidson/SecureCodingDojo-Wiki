@@ -399,4 +399,12 @@ sudo firewall-cmd --zone=public --permanent --remove-port=8081/tcp
 sudo firewall-cmd --reload
 ~~~~
 
+Update the environment variables in /etc/environment and the training portal service configuration to match the nginx SSL url. Don't forget to remove the 8081 port.
+
+~~~~
+sudo vi /etc/environment
+sudo vi /etc/systemd/system/trainingportal.service
+sudo systemctl daemon-reload
+~~~~
+
 Reboot. You are done.
