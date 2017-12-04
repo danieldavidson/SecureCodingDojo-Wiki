@@ -51,7 +51,9 @@ DOJO_TARGET_URL=http://insecureinchost:8080/insecureinc
 DOJO_DB_HOST=localhost
 ~~~~
 #### Load Balancer settings
-- Under `Load Balancer` enable the secure port and select an available certificate. Disable port 80.
+- Under `Load Balancer` enable the secure port and select an available certificate. 
+- Disable port 80.
+- Select `Enable load balancing...`
 
 NOTE:
 >If a certificate or domain has not been reserved for you can import a self signed certificate or a certificate signed by a different authority using the AWS `Certificate Manager`
