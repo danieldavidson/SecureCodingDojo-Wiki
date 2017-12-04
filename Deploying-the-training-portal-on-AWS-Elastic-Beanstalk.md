@@ -68,6 +68,7 @@ NOTE 3:
 - Under `Network` select the same VPC with the RDS instance VPC. Select the same subnets for the instance and the balancer with the RDS DB subnet. 
 - Select an applicable security group. If none is defined, define one unde `EC2 > Security Groups`
 - Save and verify all settings then hit `Create Environment`
+
 NOTE:
 >There's no need to configure a `Database` we have configured a DB independently.
 
