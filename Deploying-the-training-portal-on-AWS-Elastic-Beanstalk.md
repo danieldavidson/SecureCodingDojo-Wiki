@@ -1,3 +1,5 @@
+>Estimated duration: 2h
+
 Before you begin, you must have a running environment of the training portal with `config.js` configured and authentication configured either via local, Slack or Google or a combination.
 
 Check the page on `Deploying the training portal on CentOS` for an example on configuring a local environment.
