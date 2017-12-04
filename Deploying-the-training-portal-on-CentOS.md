@@ -81,15 +81,15 @@ sudo -u scd npm install
 You can configure flat file encryption keys as environment variables in `/etc/environment`. If you need some handy GUIDs you can get them from this site: https://www.guidgenerator.com/online-guid-generator.aspx 
 
 ~~~~
-sudo bash -c 'echo export ENC_KEY=2b1e1c4b-51ca-4010-8dd1-458007e34a87 >> /etc/environment'
-sudo bash -c 'echo export ENC_KEY_IV=a1b06d70-70a4-4af2-a79a-897c0212969a >> /etc/environment'
+sudo bash -c 'echo export ENC_KEY=YOUR_ENC_KEY >> /etc/environment'
+sudo bash -c 'echo export ENC_KEY_IV=YOUR_ENC_KEY_IV >> /etc/environment'
 ~~~~
 
 Optional, if you'd like to also configure flat file encryption for the challenge codes you can do so like this:
 
 ~~~~
-sudo bash -c 'echo export CHALLENGE_KEY=7041b3ed-220d-4b4d-aa4e-869eec708b4d >> /etc/environment'
-sudo bash -c 'echo export CHALLENGE_KEY_IV=674a89f0-1ef2-4847-8159-7a90c6939ff2 >> /etc/environment'
+sudo bash -c 'echo export CHALLENGE_KEY=YOUR_CHALLENGE_KEY >> /etc/environment'
+sudo bash -c 'echo export CHALLENGE_KEY_IV=YOUR_CHALLENGE_KEY_IV >> /etc/environment'
 ~~~~
 
 Configure the following environment variables for specifying the address of the training portal, InsecureInc target host and the database server address. 
