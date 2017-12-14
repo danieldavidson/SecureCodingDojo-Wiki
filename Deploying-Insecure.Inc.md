@@ -1,8 +1,8 @@
 > Estimated duration: 10 minutes
 
-Required OS - Linux
-Tomcat 8
-Install gcc for the C++ challenges
+>Required OS - Linux
+>Tomcat 8
+>Install gcc for the C++ challenges
 
 Insecure.Inc is a java application. There's a prebuilt WAR in the [build](https://github.com/trendmicro/SecureCodingDojo/tree/master/build) directory that can be simply dropped in the `/webapps` folder of a Apache Tomcat 8 installation.
 
