@@ -54,7 +54,7 @@ DOJO_DB_HOST=localhost
 ~~~~
 #### Load Balancer settings
 - Under `Load Balancer` enable the secure port and select an available certificate. 
-- Setup the listener on port 443
+- The balancer will listen on port 443 and proxy to port 80
 - Select `Enable load balancing...`
 
 NOTE:
