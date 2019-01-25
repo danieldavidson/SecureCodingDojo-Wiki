@@ -1,4 +1,4 @@
-# Welcome to the SecureCodingDojo wiki!
+# Welcome to the Secure Coding Dojo wiki!
 
 Please review the wiki pages for information on compiling, deploying and enhancing this project.
 
