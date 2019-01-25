@@ -5,8 +5,8 @@ Please review the wiki pages for information on compiling, deploying and enhanci
 The Secure Coding Dojo is a platform for delivering secure coding training. While it provides two vulnerable training applications the training portal can be used in conjunction with other applications as well. 
 
 Vulnerable applications:
-- Insecure.Inc is a Java site that demonstrates simple exploits based on SANS Top 25/OWASP Top 10 
-- Hacker's Den is a Serverless application for more advanced users based on OWASP Top 10
+- "Insecure.Inc" is a Java site that demonstrates simple exploits based on SANS Top 25/OWASP Top 10 
+- "Hacker's Den" is a Serverless application for more advanced users based on OWASP Top 10
 
 While training sites to teach application security concepts are not new, the target audience has traditionally been pen-testers and ethical hackers. The Secure Coding Dojo is primarily intended as a delivery platform for developers and here's why:
 
