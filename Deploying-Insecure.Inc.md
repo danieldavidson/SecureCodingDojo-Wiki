@@ -1,4 +1,15 @@
 > Estimated duration: 10 minutes
+
+# Docker Image
+
+Run the Docker container with
+~~~~
+docker run -p 8888:8080 -it securecodingdojo/insecure.inc
+~~~~
+
+Browse to: `http://localhost:8080/insecureinc`
+
+# VM
 ~~~~
 Required OS - Linux
 Tomcat 8
