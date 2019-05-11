@@ -7,7 +7,7 @@ Run with the following:
 ~~~~
 docker run -p 8081:8081 \ 
  -e DOJO_URL=http://localhost:8081 \
- -e DOJO_TARGET_URL=http://<INSECURE_INC_FOLDER> \
+ -e DOJO_TARGET_URL=http://<INSECURE_INC_URL> \
  -e DATA_DIR=/dojofiles \
  --volume=/<DOCKER_HOST_FOLDER>:/dojofiles:consistent \
  securecodingdojo/trainingportal
