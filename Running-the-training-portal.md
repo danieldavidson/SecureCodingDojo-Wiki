@@ -5,13 +5,16 @@ docker pull securecodingdojo/trainingportal
 
 Run with the following:
 ~~~~
-docker run -p 8081:8081 \ 
- -e DOJO_URL=http://localhost:8081 \
- -e DOJO_TARGET_URL=http://<INSECURE_INC_URL> \
- -e DATA_DIR=/dojofiles \
- --volume=/<DOCKER_HOST_FOLDER>:/dojofiles:consistent \
- securecodingdojo/trainingportal
+docker run -p 8081:8081 \
+-e DOJO_URL=http://localhost:8081 \
+-e DOJO_TARGET_URL=$1 \
+-e DATA_DIR=/dojofiles \
+--volume=/$2:/dojofiles:consistent \
+securecodingdojo/trainingportal
 ~~~~
+Where:
+$1 is the url of the Insecure.Inc web app
+$2 is a host directory where to save the local files
 
 Training portal with local user account setup will be running at: http://localhost:8081/
 
