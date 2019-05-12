@@ -4,10 +4,14 @@
 
 Run the Docker container with
 ~~~~
-docker run -p 8888:8080 -it securecodingdojo/insecure.inc
+docker run -p 8080:8080 \
+-e CHALLENGE_MASTER_SALT=$CHALLENGE_MASTER_SALT \
+ securecodingdojo/insecure.inc
 ~~~~
 
-Browse to: `http://localhost:8888/insecureinc`
+$CHALLENGE_MASTER_SALT - secret shared with the training portal
+
+Browse to: `http://localhost:8080/insecureinc`
 
 # VM
 ~~~~
