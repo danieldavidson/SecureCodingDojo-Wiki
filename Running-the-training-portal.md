@@ -6,17 +6,21 @@ docker pull securecodingdojo/trainingportal
 Run with the following:
 ~~~~
 docker run -p 8081:8081 \
--e DOJO_URL=http://localhost:8081 \
--e DOJO_TARGET_URL=$1 \
+-e DOJO_URL=$DOJO_URL \
+-e DOJO_TARGET_URL=$DOJO_TARGET_URL \
 -e DATA_DIR=/dojofiles \
---volume=/$2:/dojofiles:consistent \
+-e GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID \
+-e ENC_GOOGLE_CLIENT_SECRET=$ENC_GOOGLE_CLIENT_SECRET \
+-e ENC_BADGR_TOKEN=$ENC_BADGR_TOKEN \
+-e ENC_KEY=$ENC_KEY \
+-e ENC_KEY_IV=$ENC_KEY_IV \
+-e CHALLENGE_MASTER_SALT=$CHALLENGE_MASTER_SALT \
+-e CHALLENGE_URLS=$CHALLENGE_URLS \
+--volume=/$DATA_DIR:/dojofiles:consistent \
 securecodingdojo/trainingportal
 ~~~~
-Where:
-$1 is the url of the Insecure.Inc web app
-$2 is a host directory where to save the local files
 
-Training portal with local user account setup will be running at: http://localhost:8081/
+Training portal with local user account setup will be running at: http://localhost:8081/. You can front it with NGINX (see below) and configure the $DOJO_URL environment variable accordingly
 
 #### Installing on a CentOS VM
 
