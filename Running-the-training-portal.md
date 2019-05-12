@@ -21,19 +21,22 @@ securecodingdojo/trainingportal
 ~~~~
 
 Training portal with local user account setup will be running at: http://localhost:8081/. You can front it with NGINX (see below) and configure the $DOJO_URL environment variable accordingly.
+~~~~
 $DOJO_URL - external url of the dojo
 $DOJO_TARGET_URL - is the URL of Insecure.Inc
 $DATA_DIR - docker volume on the host where to store the db
 $CHALLENGE_MASTER_SALT - secret shared between portal and vulnerable apps to validate challenges
+~~~~
 
 Following are optional
+~~~~
 $CHALLENGE_URLS - JSON to define a different play link for some of the challenges
 $GOOGLE_CLIENT_ID - if configured use Google Authentication see https://github.com/trendmicro/SecureCodingDojo/wiki/Integrating-with-Google
 $ENC_GOOGLE_CLIENT_SECRET - is an encrypted client secret
 $ENC_BADGR_TOKEN - encrypted token for integration with Badgr.io
 $ENC_KEY - seed for encryption key, (store somewhere else, like /etc/profile.d)
 $ENC_KEY_IV - seed for encryption IV (store somewhere else, like /etc/profile.d)
-
+~~~~
 
 #### Installing on a CentOS VM
 
