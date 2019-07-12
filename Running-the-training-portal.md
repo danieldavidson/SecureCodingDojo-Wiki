@@ -46,7 +46,7 @@ The following page covers installing the training portal on RedHat/CentOS using 
 #### Pre-requisites
 ~~~~
 CentOS 7 minimal installation
-NodeJS v6
+NodeJS v10
 MySQL (MariaDB)
 Nginx
 ~~~~
