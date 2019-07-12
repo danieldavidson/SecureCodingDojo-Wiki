@@ -127,12 +127,13 @@ sudo bash -c 'echo export ENC_KEY=YOUR_ENC_KEY >> /etc/environment'
 sudo bash -c 'echo export ENC_KEY_IV=YOUR_ENC_KEY_IV >> /etc/environment'
 ~~~~
 
-Optional, if you'd like to also configure flat file encryption for the challenge codes you can do so like this:
+Optional, if you'd like to prevent participants from generating their own challenge codes ;) do this:
 
 ~~~~
-sudo bash -c 'echo export CHALLENGE_KEY=YOUR_CHALLENGE_KEY >> /etc/environment'
-sudo bash -c 'echo export CHALLENGE_KEY_IV=YOUR_CHALLENGE_KEY_IV >> /etc/environment'
+sudo bash -c 'echo export CHALLENGE_MASTER_SALT=YOUR_CHALLENGE_MASTER_SALT >> /etc/environment'
 ~~~~
+NOTE:
+> You have to configure the same CHALLENGE_MASTER_SALT env variable on the system where Insecure.Inc is running.
 
 Configure the following environment variables for specifying the address of the training portal, InsecureInc target host and the database server address. 
 
@@ -174,10 +175,6 @@ NOTE:
 
 Update the `dbPass` variable. You will need to edit the `slackSecret` and `googleSecret` variables if you choose to configure any of these authentication methods.
 
-Set the `regenerateSecrets` variable to true to create new secrets so that people won't be able to cheat.
-
-NOTE:
->If you regenerate secrets you will need to update the InsecureInc app by updating the code.properties file on the tomcat deployment in 'webapps/insecureinc/classes/inc/insecure'
 
 Save the `encryptConfigs.js` file.
 
@@ -196,12 +193,7 @@ Copy the output of the program which should look like this:
 config.encDbPass="NOGgYuo7lAeUhZzISsYwTw=="
 config.encSlackClientSecret="NOGgYuo7lAeUhZzISsYwTw=="
 config.encGoogleClientSecret="FmCdrWGdzF6ExdxD5kFPbg=="
-config.encExpressSessionSecret="GjqYjBq2sBeOSm3a4dGU/FPc8uIB9acp4VPrnIiiF6TUu4eYCidKy1FF6ZuI0ZywIcIVCJCwmZzEF/iTQUhFFfRdTXVIKezVs2QlVVbqHVcf0q5+kuJ/j/DIt/uHqkjL"
-======= challengeSecrets.json ==========
-Configure the CHALLENGE_KEY and CHALLENGE_KEY_IV environment variables to store the secrets encrypted!
-"cwe306":"u4Jbronzpk_iQEVB5tTHMg"
-...
-~~~~
+
 
 Delete the secrets and passwords from the encryptConfigs.js file.
 
@@ -272,7 +264,6 @@ Navigate to the configured url. You should now be able to register an account fo
 
 #### What could go wrong
 * You see crypto.js exceptions. Check that you didn't leave any encrypted variables set to empty strings.
-* You cannot register. Keep getting invalid captcha. The value of `encExpressSessionSecret` is probably incorrect. Generate a new one using `encryptConfigs.js` and make sure you copy the entire string.
 
 ### Next steps
 
@@ -313,7 +304,7 @@ RestartSec=10
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=nodejs
-Environment=ENC_KEY=<YOUR_ENC_KEY>  ENC_KEY_IV=<YOUR_ENC_KEY_IV> DOJO_URL=http://<YOUR_HOST>:8081 DOJO_TARGET_URL=http://insecureinchost:8080/insecureinc DOJO_DB_HOST=localhost
+Environment=ENC_KEY=YOUR_ENC_KEY  ENC_KEY_IV=YOUR_ENC_KEY_IV CHALLENGE_MASTER_SALT=YOUR_CHALLENGE_MASTER_SALT DOJO_URL=http://<YOUR_HOST>:8081 DOJO_TARGET_URL=http://insecureinchost:8080/insecureinc DOJO_DB_HOST=localhost
 
 User=scd
 Group=scd
