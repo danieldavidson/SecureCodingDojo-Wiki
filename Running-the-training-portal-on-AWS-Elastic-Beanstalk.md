@@ -38,7 +38,7 @@ For testing purposes verify that your current running instance of the training p
 - Choose `web server environment`
 - Choose a convenient domain. Copy this you will need it later.
 - Choose a preconfigured platform: `Node.js`
-- Zip the contents of the `trainingportal` directory (do not zip the folder)
+- Run ./buildTrainingPortal.sh to generate a ZIP file for AWS
 - Select `Upload your source code` and point to the zip
 - Select `Configure more options`
 - Select the `High availability` configuration
@@ -48,9 +48,7 @@ Make sure the DOJO_URL matches the domain you have chosen for your environment a
 ~~~~
 ENC_KEY=<YOUR_KEY>
 ENC_KEY_IV=<YOUR_IV>
-DOJO_URL=https://<your beanstalk FQDN>
-DOJO_TARGET_URL=http://insecureinchost:8080/insecureinc
-DOJO_DB_HOST=localhost
+CHALLENGE_MASTER_SALT=<YOUR_CHALLENGE_MASTER_SALT>
 ~~~~
 #### Load Balancer settings
 - Under `Load Balancer` enable the secure port and select an available certificate. 
