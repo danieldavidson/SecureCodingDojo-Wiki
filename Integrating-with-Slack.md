@@ -11,5 +11,5 @@ You will need to create a Slack app for authentication.
 
 - Edit `encryptConfigs.js` and set the value for `slackSecret`
 - Run `encryptConfig.js`
-- Update the value for the `config.encSlackClientSecret` variable in `config.js`
-- Update the values for `config.slackClientId` and `config.slackTeamId`
+- Update the value for the `encSlackClientSecret` variable in `config.js`
+- Update the values for `slackClientId` and `slackTeamId`
