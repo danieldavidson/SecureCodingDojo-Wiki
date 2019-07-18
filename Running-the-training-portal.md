@@ -6,37 +6,39 @@ docker pull securecodingdojo/trainingportal
 Run with the following:
 ~~~~
 docker run -p 8081:8081 \
--e DOJO_URL=$DOJO_URL \
--e DOJO_TARGET_URL=$DOJO_TARGET_URL \
 -e DATA_DIR=$DATA_DIR \
 -e CHALLENGE_MASTER_SALT=$CHALLENGE_MASTER_SALT \
--e CHALLENGE_URLS=$CHALLENGE_URLS \
--e GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID \
--e ENC_GOOGLE_CLIENT_SECRET=$ENC_GOOGLE_CLIENT_SECRET \
--e ENC_BADGR_TOKEN=$ENC_BADGR_TOKEN \
 -e ENC_KEY=$ENC_KEY \
 -e ENC_KEY_IV=$ENC_KEY_IV \
 --volume=$DATA_DIR:/dojofiles:consistent \
 securecodingdojo/trainingportal
 ~~~~
 
-Training portal with local user account setup will be running at: http://localhost:8081/. You can front it with NGINX (see below) and configure the $DOJO_URL environment variable accordingly.
+Training portal with local user account setup will be running at: http://localhost:8081/. You can front it with NGINX (see below) and configure the public url in config.json .
+
+Here's a sample config.json configuration
+
 ~~~~
-$DOJO_URL - external url of the dojo
-$DOJO_TARGET_URL - is the URL of Insecure.Inc
-$DATA_DIR - docker volume on the host where to store the db
-$CHALLENGE_MASTER_SALT - secret shared between portal and vulnerable apps to validate challenges
+{
+    "dojoUrl" : "YOUR_DOJO_PUBLIC_URL",
+    "moduleUrls" : {
+        "blackBelt":"YOUR_INSECURE_INC_PUBLIC_URL",
+        "securityCodeReviewMaster":"https://trendmicro.github.io/SecureCodingDojo/codereview101/?fromPortal"
+    },
+
+    "localUsersPath" : "localUsers.json",
+}
 ~~~~
 
-Following are optional
+Environment variables
 ~~~~
-$CHALLENGE_URLS - JSON to define a different play link for some of the challenges
-$GOOGLE_CLIENT_ID - if configured use Google Authentication see https://github.com/trendmicro/SecureCodingDojo/wiki/Integrating-with-Google
-$ENC_GOOGLE_CLIENT_SECRET - is an encrypted client secret
-$ENC_BADGR_TOKEN - encrypted token for integration with Badgr.io
+$DATA_DIR - docker volume on the host where to store the db
+$CHALLENGE_MASTER_SALT - secret shared between portal and vulnerable apps to validate challenges
 $ENC_KEY - seed for encryption key, (store somewhere else, like /etc/profile.d)
 $ENC_KEY_IV - seed for encryption IV (store somewhere else, like /etc/profile.d)
 ~~~~
+
+
 
 #### Installing on a CentOS VM
 
@@ -53,49 +55,6 @@ Nginx
 #### Installing Node
 
 Follow instructions on this page according to your distribution: https://nodejs.org/en/download/package-manager/
-
-#### Installing Maria DB
-
-There's a good article on installing MariaDB on CentOS here: https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-centos-7
-
-#### Setting up a database
-
-You will have to create a database and a user for the secure coding dojo. Grant your secure coding dojo user full privileges on the newly created database.
-
-You can access the mysql console using the following command
-
-~~~~
-mysql -u root -p
-~~~~
-
-Create a user with the following command:
-
-~~~~
-CREATE USER 'securecodingdojo';
-~~~~
-
-Create a database using the following command:
-
-~~~~
-CREATE DATABASE securecodingdojodb;
-~~~~
-
-Grant your newly created user access to the secure coding dojo database with the following:
-
-~~~~
-GRANT ALL ON securecodingdojodb.* to 'securecodingdojo'@'localhost'
- IDENTIFIED BY '_dbpassword_';
-~~~~
-
-
-#### Setting up a OS user for the training portal
-
-~~~~~
-sudo groupadd scd
-sudo mkdir /opt/scd
-sudo useradd -s /bin/nologin -g scd -d /opt/scd scd
-sudo chown scd /opt/scd
-~~~~~
 
 #### Downloading the training portal
 
@@ -132,19 +91,9 @@ Optional, if you'd like to prevent participants from generating their own challe
 ~~~~
 sudo bash -c 'echo export CHALLENGE_MASTER_SALT=YOUR_CHALLENGE_MASTER_SALT >> /etc/environment'
 ~~~~
+
 NOTE:
 > You have to configure the same CHALLENGE_MASTER_SALT env variable on the system where Insecure.Inc is running.
-
-Configure the following environment variables for specifying the address of the training portal, InsecureInc target host and the database server address. 
-
-NOTE:
-> These are particularly useful if later, you choose to deploy the environment on AWS ELB. You can also edit the host names and db names directly in /trainingportal/config.js if you don't plan to deploy on AWS.
-
-~~~~
-sudo bash -c 'echo export DOJO_URL=http://`hostname -f`:8081 >> /etc/environment'
-sudo bash -c 'echo export DOJO_TARGET_URL=http://insecureinchost:8080/insecureinc >> /etc/environment'
-sudo bash -c 'echo export DOJO_DB_HOST=localhost >> /etc/environment'
-~~~~
 
 Verify changes have been applied and then reboot
 
@@ -155,14 +104,16 @@ reboot
 
 #### Configuring the training portal settings
 
-Change the directory to the training portal dir and copy the config.js sample, the challengeSecrets.json and the localUsers.json sample as the user scd.
+Change the directory to the training portal dir and copy the config.json sample and the localUsers.json sample as the user scd.
 
 ~~~~
 cd /opt/scd/SecureCodingDojo/trainingportal/
-sudo -u scd cp config.js.sample config.js
-sudo -u scd cp challengeSecrets.json.sample challengeSecrets.json
+sudo -u scd cp config.json.sample config.json
 sudo -u scd cp localUsers.json.sample localUsers.json
 ~~~~
+
+NOTE:
+> THIS IS OPTIONAL - You only need to configure encrypted settings if you plan to integrate with Slack, Google or plan to use a MYSQL DB.
 
 Edit the `encryptConfigs.js` script with vi as the scd user.
 
@@ -189,7 +140,7 @@ sudo -u scd node encryptConfigs.js
 
 Copy the output of the program which should look like this:
 ~~~~
-======= config.js ==========
+======= config.json ==========
 config.encDbPass="NOGgYuo7lAeUhZzISsYwTw=="
 config.encSlackClientSecret="NOGgYuo7lAeUhZzISsYwTw=="
 config.encGoogleClientSecret="FmCdrWGdzF6ExdxD5kFPbg=="
@@ -197,42 +148,36 @@ config.encGoogleClientSecret="FmCdrWGdzF6ExdxD5kFPbg=="
 
 Delete the secrets and passwords from the encryptConfigs.js file.
 
-Edit the config.js file with vi
+Edit the config.json file with vi
 
 ~~~~
-sudo -u scd vi config.js
+sudo -u scd vi config.json
 ~~~~
 
 NOTE:
 > The following settings configure the training portal using local authentication (less secure). For integrating with Slack or Google authentication check the relevant wiki pages.
 
-Paste the corresponding values from the encryptConfigs.js output. Should look something like this.
+Paste the corresponding values from the encryptConfigs.js output. 
+The config file should look something like this.
 
 ~~~~
-//rename to config.js and populate accordingly
-var config = {};
-config.dojoUrl = process.env.DOJO_URL;
-config.dojoTargetUrl = process.env.DOJO_TARGET_URL;
-config.isSecure = config.dojoUrl.startsWith("https");
-config.dbHost = process.env.DOJO_DB_HOST;
-config.dbName = 'securecodingdojodb';
-config.dbUser = 'securecodingdojo';
+{
+    "dojoUrl" : "YOUR_DOJO_URL",
+    "moduleUrls" : {
+        "blackBelt":"YOUR_INSECURE_INC_URL",
+        "securityCodeReviewMaster":"https://trendmicro.github.io/SecureCodingDojo/codereview101/?fromPortal"
+    },
 
-config.encDbPass="NOGgYuo7lAeUhZzISsYwTw=="
+  
+    "localUsersPath" : "localUsers.json",
 
-//config.googleClientId = ''; //enable to configure Google authentication
-config.encGoogleClientSecret = '';
-config.localUsersPath = 'localUsers.json';//authentication using a password file containing users and hashed passwords, no lockout
+    "googleClientId" : "YOUR_GOOGLE_CLIENT_ID",
+    "slackClientId" : "YOUR_SLACK_CLIENT_ID",
+    "slackTeamId" : "YOUR_SLACK_TEAM_ID",
 
-config.encExpressSessionSecret="GjqYjBq2sBeOSm3a4dGU/FPc8uIB9acp4VPrnIiiF6TUu4eYCidKy1FF6ZuI0ZywIcIVCJCwmZzEF/iTQUhFFfRdTXVIKezVs2QlVVbqHVcf0q5+kuJ/j/DIt/uHqkjL"
-config.googleOauthCallbackUrl = config.dojoUrl+"/public/google/callback";
-config.slackOauthCallbackUrl = config.dojoUrl+"/public/slack/callback";
-
-//config.slackClientId = '';//enable to configure Slack authentication
-config.slackTeamId = '';
-config.encSlackClientSecret = '';
-
-module.exports = config;
+    "encGoogleClientSecret":"GENERATED_WITH_ENCRYPT_CONFIGS",
+    "encSlackClientSecret":"GENERATED_WITH_ENCRYPT_CONFIGS"
+}
 ~~~~
 
 Reminder: hit ESC and enter `:wq` to save.
@@ -269,7 +214,7 @@ Navigate to the configured url. You should now be able to register an account fo
 
 At this point you have the training portal application working on CentOS. If you wish to deploy in AWS you can stop here and import your installation directory into a AWS Elastic Beanstalk environment. See the corresponding wiki pages for instructions.
 
-You may also want to enable other authentication types such as Google or Slack. See the corresponding pages for instructions. Commenting out the `config.localUsersPath` setting will disable the local authentication option.
+You may also want to enable other authentication types such as Google or Slack. See the corresponding pages for instructions. Removing out the `localUsersPath` setting will disable the local authentication option.
 
 If you want to continue with configuring the training portal as a service see instructions below.
 
@@ -304,7 +249,7 @@ RestartSec=10
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=nodejs
-Environment=ENC_KEY=YOUR_ENC_KEY  ENC_KEY_IV=YOUR_ENC_KEY_IV CHALLENGE_MASTER_SALT=YOUR_CHALLENGE_MASTER_SALT DOJO_URL=http://<YOUR_HOST>:8081 DOJO_TARGET_URL=http://insecureinchost:8080/insecureinc DOJO_DB_HOST=localhost
+Environment=ENC_KEY=YOUR_ENC_KEY  ENC_KEY_IV=YOUR_ENC_KEY_IV CHALLENGE_MASTER_SALT=YOUR_CHALLENGE_MASTER_SALT
 
 User=scd
 Group=scd
