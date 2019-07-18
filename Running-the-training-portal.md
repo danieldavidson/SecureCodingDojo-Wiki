@@ -16,7 +16,7 @@ securecodingdojo/trainingportal
 
 Training portal with local user account setup will be running at: http://localhost:8081/. You can front it with NGINX (see below) and configure the public url in config.json .
 
-Here's a sample config.json configuration
+Here's a sample config.json configuration. Save this file to the $DATA_DIR
 
 ~~~~
 {
