@@ -193,7 +193,7 @@ Copy the output of the program which should look like this:
 config.encDbPass="NOGgYuo7lAeUhZzISsYwTw=="
 config.encSlackClientSecret="NOGgYuo7lAeUhZzISsYwTw=="
 config.encGoogleClientSecret="FmCdrWGdzF6ExdxD5kFPbg=="
-
+~~~~
 
 Delete the secrets and passwords from the encryptConfigs.js file.
 
