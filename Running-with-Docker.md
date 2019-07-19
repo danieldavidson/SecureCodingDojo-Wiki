@@ -1,5 +1,5 @@
 # Docker Setup
-You will need the latest version of Docker. Tested on Mac with Docker Desktop 18.09.2,
+You will need the latest version of Docker. Tested on Mac with Docker Desktop 18.09.2.
 
 # Basic Setup Instructions
 You can use the `docker-compose.yml` file included with the project to spin up a basic installation of the project in a few easy steps.
