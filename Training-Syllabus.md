@@ -28,3 +28,9 @@
 | Second Degree Black Belt : Injection                                                                                      | CWE 78                    | A1                | 6.5.1            |
 | Second Degree Black Belt : XML External Entities                                                                          | CWE 611                   | A4                | 6.5.1            |
 | Second Degree Black Belt : Using Components with Known Vulnerabilities & Insecure Deserialization                         | CWE 509                   | A8; A9            | 6.5.1            |
+| Security Code Review Master : Input Validation                                                                | Various                   | Various           | Various          |
+| Security Code Review Master : Parameterized Statements                                                        | CWE 78; CWE 89;           | A1                | 6.5.1            |
+| Security Code Review Master : Memory Best Practices                                                           | CWE 120; CWE 131; CWE 193; CWE 134 | N/A      | 6.5.2            |
+| Security Code Review Master : Protecting Data                                                                 | CWE 311; CWE 312; CWE 759; CWE 319; CWE 327   | A3     |  6.5.3, 6.5.4 |
+| Security Code Review Master : Preventing Cross-Site Scripting                                                                 | CWE 79;                   | A7                |6.5.7              |
+| Security Code Review Master : Indirect Object References                                                                 | CWE 22; CWE 601           | A5                |6.5.8              |
