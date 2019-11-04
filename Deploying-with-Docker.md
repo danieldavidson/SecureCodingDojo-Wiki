@@ -34,7 +34,7 @@ Once you got that setup you want to configure DNS to point to the load balancer(
 
 When that is done tell the dojo what are the URLs by creating a `config.json` file in the docker volume, the $DATA_DIR env variable that you have configured earlier:
 
-Example `$DATA_DIR\config.json` file
+Example `$DATA_DIR/config.json` file
 ~~~~
 {
     "dojoUrl" : "https://YOUR_PORTAL_HOST",
