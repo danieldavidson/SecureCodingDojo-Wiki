@@ -6,10 +6,11 @@ You can use the `docker-compose.yml` file included with the project to spin up a
 
 - Git clone the repository
 - Change directory to the repo root directory where the `docker-compose.yml` file is located
-- Configure an environment variable DATA_DIR as a mount point for the dojo files. On *nix/mac modify `.bash_profile` or `/etc/environment` as follows
+- Configure an environment variable DATA_DIR as a mount point for the dojo files. On *nix/mac modify `.bash_profile` as follows
 ~~~~
 export DATA_DIR="/YOUR_DATA_DIR"
 ~~~~
+- Restart your terminal after editing or `source ~/.bash_profile` 
 - On Mac you must allow Docker access to this directory in Docker > Preferences > File Sharing
 - Restart your terminal
 - Run with
