@@ -51,6 +51,7 @@ Example `$DATA_DIR/config.json` file
 ~~~~
 Explanations:
 > The "securityCodeReviewMaster" is a static training modules running directly from the Githuib repo
+
 > The "secondDegreeBlackBelt" requires an AWS deployment with API gateway and Lambda which is not currently available as code. So you should disable it for now.
 
 # Configuring CHALLENGE_MASTER_SALT
