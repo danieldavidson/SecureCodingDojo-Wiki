@@ -10,9 +10,8 @@ You can use the `docker-compose.yml` file included with the project to spin up a
 ~~~~
 export DATA_DIR="/YOUR_DATA_DIR"
 ~~~~
-- Restart your terminal after editing or `source ~/.bash_profile` 
 - On Mac you must allow Docker access to this directory in Docker > Preferences > File Sharing
-- Restart your terminal
+- Restart your terminal after editing or `source ~/.bash_profile` 
 - Run with
 ~~~~
 docker-compose up
