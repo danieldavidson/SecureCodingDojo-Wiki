@@ -4,8 +4,4 @@ Developed in Javascript/Node
 * node/npm (developed with Node 10)
 * MySQL server + My SQL Workbench (developed with MySQL 5.7)
 
-### Insecure.Inc
-Developed in Java
-* Eclipse Java EE latest version (developed with Neon) 
-* Java 1.8
-* Tomcat 8 
+
