@@ -26,6 +26,8 @@ Setup your dojo configuration file `config.json`. `config.json.sample` contains 
 
 `cp ../build/trainingportal/config.json.sample config.json`
 
+Run tests with `npm test`
+
 Open `server.js`. Hit *F5* to debug.
 
 Your debug portal is running on http://localhost:8081
