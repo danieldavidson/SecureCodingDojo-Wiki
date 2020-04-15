@@ -30,7 +30,7 @@ Open `server.js`. Hit *F5* to debug.
 
 Your debug portal is running on http://localhost:8081
 
-Setup a user and login to check it out.
+Register a test user and login to check it out.
 
 
 
