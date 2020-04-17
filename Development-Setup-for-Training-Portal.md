@@ -16,6 +16,17 @@ Open a Terminal. Change the directory to `trainingportal`:
 
 `cd trainingportal`
 
+## Automatic Setup
+
+Run the devSetup.sh script (Mac/Linux).
+This will configure the dev environment with a SQLITE database 
+~~~
+chmod +x devSetup.sh
+./devSetup.sh
+~~~
+
+## Manual Setup
+
 Install npm dependencies:
 
 `npm install`
@@ -24,9 +35,15 @@ Run `npm audit fix` to fix any vulnerabilities in 3rd party dependencies.
 
 Setup your dojo configuration file `config.json`. `config.json.sample` contains a bunch of examples but if you need a quick config to get you started use the Docker config from /build/trainingportal
 
-`cp ../build/trainingportal/config.json.sample config.json`
+`cp ../build/trainingportal/config.json config.json`
+
+Init a local database and a test user
+
+`node tools/devSetup.js`
 
 Run tests with `npm test`
+
+## Debug
 
 Open `server.js`. Hit *F5* to debug.
 
