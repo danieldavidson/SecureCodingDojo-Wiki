@@ -8,6 +8,7 @@ Training applications:
 - "Insecure.Inc" is a Java site that demonstrates simple exploits based on SANS Top 25/OWASP Top 10 
 - "Hacker's Den" is a Serverless application for more advanced users based on OWASP Top 10
 - "Security Code Review 101" is a static web site that runs directly from the Dojo Github
+- "Red Team/Blue Team" is an insecure container image
 
 The Secure Coding Dojo is primarily intended as a delivery platform for developers and here's why:
 
