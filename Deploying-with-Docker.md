@@ -17,6 +17,14 @@ export DATA_DIR="/YOUR_DATA_DIR"
 docker-compose up
 ~~~~
 
+# Starting the apps automatically
+For starting the apps automatically simply update the yml file to set a restart policy of always like this:
+~~~~
+ trainingportal:
+    image: securecodingdojo/trainingportal
+    restart: always #change to always if you want the image to auto start
+~~~~
+
 # Configuring Public URLs
 Your dojo will be running on `localhost` out of a default configuration file. 
 There are two containers:
