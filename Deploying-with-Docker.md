@@ -17,12 +17,18 @@ export DATA_DIR="/YOUR_DATA_DIR"
 docker-compose up
 ~~~~
 
-# Starting the apps automatically
-For starting the apps automatically simply update the yml file to set a restart policy of always like this:
+# Starting the services automatically
+For starting the services automatically simply update the docker-compose.yml file to set a restart policy of always like this:
 ~~~~
+...
+  insecureinc:
+    image: securecodingdojo/insecure.inc
+    restart: no #change to always if you want the image to auto start
+...
  trainingportal:
     image: securecodingdojo/trainingportal
     restart: always #change to always if you want the image to auto start
+...
 ~~~~
 
 # Configuring Public URLs
