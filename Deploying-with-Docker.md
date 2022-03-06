@@ -23,11 +23,11 @@ For starting the services automatically simply update the docker-compose.yml fil
 ...
   insecureinc:
     image: securecodingdojo/insecure.inc
-    restart: no #change to always if you want the image to auto start
+    restart: "always" #change to always if you want the image to auto start
 ...
  trainingportal:
     image: securecodingdojo/trainingportal
-    restart: always #change to always if you want the image to auto start
+    restart: "always" #change to always if you want the image to auto start
 ...
 ~~~~
 
